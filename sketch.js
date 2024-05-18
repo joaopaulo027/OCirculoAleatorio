@@ -1,34 +1,41 @@
-let palavra;
+let cor;
+let circuloX; // horizontal
+let circuloY; // vertical
 
 function setup() {
-  createCanvas(400, 400);
-
-  palavra = palavraAleatoria();
+  createCanvas(665, 500); // width x height
+  background(color(100, 0, 0));
+  cor = color(random(0, 255), random(0, 255), random(0, 255));
+  circuloX = [0, 0, 0];
+  circuloY = [random(height), random(height), random(height)];
 }
 
-function palavraAleatoria(){
-  let palavras = ["É O Caminho", "É A Verdade", "É A Vida"];
-  return random(palavras);
-}
 
-function inicializaCores() {
 
-  background("white");
-  fill("black");
-  textSize(70);
-  textAlign(CENTER, CENTER);
-}
-
-function palavraParcial(minimo, maximo) {
-  let quantidade = map(mouseX, minimo, maximo, 1, palavra.length);
-  let parcial = palavra.substring(0, quantidade);
-  return parcial;
-}
+// circuloX = 0,0, 0
+// circuloY = 300, 150, 50
 
 function draw() {
+  
+  fill(cor);
 
-  inicializaCores();
+  // console.log(circuloX.length);
+  for (let contador in circuloX) {
+    console.log(contador);
+    circle(circuloX[contador], circuloY[contador], 50);
+    circuloX[contador] += random(0, 3);
+    circuloY[contador] += random(-3, 3);
+  
+  if(circuloX[contador] >= width) {
+    circuloX[contador] = 0;
+    circuloY[contador] = random(height);
+  }
 
-  let texto = palavraParcial(0, width);
-  text(texto, 200, 200);
+}
+  
+  if (mouseIsPressed) {
+    cor = color(random(0, 255), random(0, 255), random(0, 255));
+    random(0, 100);
+  }
+  
 }
